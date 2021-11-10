@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:get/get.dart';
 import 'package:transactions/screens/main_profile_screen/profile_card.dart';
 import 'package:transactions/screens/profile_details_screen/profile_details_screen.dart';
-import 'package:transactions/shared_comonents/height_spacer.dart';
 import 'package:transactions/utility/app_colors.dart';
-import 'package:transactions/utility/app_get_x.dart';
+// import 'package:transactions/utility/app_get_x.dart';
 import 'package:transactions/utility/app_styles.dart';
+import 'package:transactions/utility/payment_bloc.dart';
 import 'package:transactions/utility/size_config.dart';
 
 import 'overview_card.dart';
@@ -16,9 +17,9 @@ class MainProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    final get = Get.put(Getx());
-    get.userInitInfo();
-    get.userInitOverview();
+    // final get = Get.put(Getx());
+    // get.userInitInfo();
+    // get.userInitPayment();
     return Scaffold(
         bottomNavigationBar: Padding(
           padding: EdgeInsets.all(SizeConfig.width05),
@@ -35,7 +36,13 @@ class MainProfileScreen extends StatelessWidget {
                   ),
                   child: IconButton(
                       onPressed: () {
-                        Get.to(() => const ProfileDetailsScreen());
+                        // Get.to(() => const ProfileDetailsScreen());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const ProfileDetailsScreen()),
+                        );
                       },
                       icon: const Icon(
                         Icons.add,
@@ -49,25 +56,31 @@ class MainProfileScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(SizeConfig.width05),
-          child: Column(
-            children: [
-              SizedBox(height: SizeConfig.height * 0.05),
-              GetBuilder<Getx>(builder: (_) => const ProfileCard()),
-              SizedBox(height: SizeConfig.height * 0.025),
-              Row(
-                children: [
-                  Text('Overview', style: textStyleHeadlineDark),
-                  const Icon(Icons.notification_important_sharp),
-                  const Spacer(),
-                  Text(get.userPayments.lastModify,
-                      style: textStyleSubtitleDark),
-                ],
-              ),
-              SizedBox(height: SizeConfig.height * 0.025),
-              const OverviewCard(),
-            ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(SizeConfig.width05),
+            child: Column(
+              children: [
+                SizedBox(height: SizeConfig.height * 0.05),
+                // GetBuilder<Getx>(builder: (_) => const ProfileCard()),
+                const ProfileCard(),
+                SizedBox(height: SizeConfig.height * 0.025),
+                Row(
+                  children: [
+                    Text('Overview', style: textStyleHeadlineDark),
+                    const Icon(Icons.notification_important_sharp),
+                    const Spacer(),
+                    BlocProvider(
+                      create: (_) => PaymentBloc(),
+                      child: Text(PaymentBloc().userPayments.lastModify,
+                          style: textStyleSubtitleDark),
+                    ),
+                  ],
+                ),
+                SizedBox(height: SizeConfig.height * 0.025),
+                const OverviewCard(),
+              ],
+            ),
           ),
         ));
   }

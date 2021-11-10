@@ -18,7 +18,7 @@ class PaymentTypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.height * 0.09,
+      // height: SizeConfig.height * 0.09,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),

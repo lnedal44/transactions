@@ -4,10 +4,11 @@ import 'package:transactions/utility/size_config.dart';
 import 'package:transactions/utility/urls.dart';
 
 class NestedCercles extends StatelessWidget {
+  const NestedCercles({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    print(SizeConfig.height * 0.4);
-    Widget bigCircle = Container(
+    Widget bigCircle = SizedBox(
       width: SizeConfig.height * 0.4,
       height: SizeConfig.height * 0.4,
       child: Padding(
@@ -48,38 +49,33 @@ class NestedCercles extends StatelessWidget {
           children: [
             bigCircle,
             Positioned(
-              child: CircleButton(
-                  onTap: () => print("Cool"), image: URL().unknownPerson),
+              child: CircleButton(onTap: () => {}, image: URL().unknownPerson),
               top: 0,
               left: SizeConfig.height * 0.175,
             ),
             Positioned(
-              child: CircleButton(
-                  onTap: () => print("Cool"), image: URL().unknownPerson),
+              child: CircleButton(onTap: () => {}, image: URL().unknownPerson),
               top: SizeConfig.height * 0.14,
               left: 0,
             ),
             Positioned(
-              child: CircleButton(
-                  onTap: () => print("Cool"), image: URL().unknownPerson),
+              child: CircleButton(onTap: () => {}, image: URL().unknownPerson),
               top: SizeConfig.height * 0.14,
               right: 0,
             ),
             Positioned(
-              child: CircleButton(
-                  onTap: () => print("Cool2"), image: URL().unknownPerson),
+              child: CircleButton(onTap: () => {}, image: URL().unknownPerson),
               top: SizeConfig.height * 0.3,
               left: SizeConfig.height * 0.3,
             ),
             Positioned(
-              child: CircleButton(
-                  onTap: () => print("Cool2"), image: URL().unknownPerson),
+              child: CircleButton(onTap: () {}, image: URL().unknownPerson),
               top: SizeConfig.height * 0.3,
               left: SizeConfig.height * 0.05,
             ),
             Positioned(
               child: CircleButtonCenter(
-                  onTap: () => print("Cool"), image: URL().unknownPerson),
+                  onTap: () => {}, image: URL().unknownPerson),
               top: SizeConfig.height * 0.15,
               left: SizeConfig.height * 0.15,
             ),
